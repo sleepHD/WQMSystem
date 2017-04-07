@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="WQMField.Model"
+                   assembly="WQMField">
+  
+  <!-- Mappings for class 'Center' -->
+  <class name="DataRecord" table="t_mid_datarecords">
+
+    <!-- Identity mapping -->
+    <id name="RecordTime">
+    </id>
+
+    <!-- Simple mappings -->
+    <property name="UpLoad" />
+
+    <!-- One-to-many mapping: DataItems -->
+    <bag name="DataItems" cascade="all-delete-orphan" lazy="false">
+      <key column="RecordTime" />
+      <one-to-many class="VariableData" />
+    </bag>
+    
+  </class>
+
+</hibernate-mapping>
+

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="WQMField.Model"
+                   assembly="WQMField">
+  
+  <!-- Mappings for class 'Center' -->
+  <class name="Variable" table="t_cod_vars">
+
+    <!-- Identity mapping -->
+    <id name="Id">
+    </id>
+
+    <!-- Simple mappings -->
+    <property name="Name" />
+    <property name="OpcName" />
+    <property name="Format" />
+    <property name="Code1" />
+    
+  </class>
+
+</hibernate-mapping>
+

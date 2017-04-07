@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="WQMField.Model"
+                   assembly="WQMField">
+  
+  <!-- Mappings for class 'Center' -->
+  <class name="Center" table="t_sys_centers">
+
+    <!-- Identity mapping -->
+    <id name="CenterIndex">
+      <column name="ID" />
+      <generator class="native" />
+    </id>
+
+    <!-- Simple mappings -->
+    <property name="Name" />
+    <property name="Path" />
+    <property name="TransportType" />
+    <property name="TransportSetting" />
+    <property name="Enabled" />
+
+    <!-- Many-to-one mapping: Field -->
+    <many-to-one name="Field"
+                 class="Field"
+                 column="SiteID"
+                 cascade="all" />
+
+  </class>
+
+</hibernate-mapping>
+

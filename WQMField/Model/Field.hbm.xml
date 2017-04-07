@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   namespace="WQMField.Model"
+                   assembly="WQMField">
+  
+  <!-- Mappings for class 'Field' -->
+  <class name="Field" table="t_sys_site">
+
+    <!-- Identity mapping -->
+    <id name="ID">
+      <generator class="native" />
+    </id>
+
+    <!-- One-to-many mapping: Centers -->
+    <bag name="Centers" cascade="all-delete-orphan" lazy="false">
+      <key column="SiteID" />
+      <one-to-many class="Center" />
+    </bag>
+
+    <!-- many-to-many mapping: Variables -->
+    <bag name="Variables" table="t_bas_sitevars" cascade="all-delete-orphan" lazy="false">
+      <key column="SiteID" />
+      <many-to-many class="Variable" column="VarID" />
+    </bag>
+
+    <!-- Simple mappings -->
+    <property name="Name" />
+    <property name="ST" />
+    <property name="MN" />
+    <property name="Password" />
+    <property name="ProtocolName" />
+    <property name="ProtocolDll" />
+
+  </class>
+
+</hibernate-mapping>
+
