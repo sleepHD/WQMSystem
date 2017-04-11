@@ -30,6 +30,10 @@ namespace WQMField.ViewModel
 
         private TreeViewItemViewModel _selectedItem;
 
+        private List<DataRecordViewModel> _dataRecords;
+
+        private List<VariableDataViewModel> _variableData;
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -56,6 +60,11 @@ namespace WQMField.ViewModel
             {
                 SelectedItem = itm;
             });
+
+            _dataRecords = _fieldSystem.DataRecords.Select(d => new DataRecordViewModel(d)).ToList();
+
+            _variableData = _fieldSystem.DataRecords.SelectMany(d => d.DataItems)
+                       .Select(v => new VariableDataViewModel(v)).ToList();
         }
 
         public ReadOnlyCollection<FieldViewModel> Fields { get { return _fields; } }
@@ -67,6 +76,21 @@ namespace WQMField.ViewModel
             {
                 _selectedItem = value;
                 RaisePropertyChanged("SelectedItem");
+            }
+        }
+
+        public List<DataRecordViewModel> DataRecords
+        {
+            get
+            {
+                return _dataRecords;
+            }
+        }
+        public List<VariableDataViewModel> VariableData
+        {
+            get
+            {
+                return _variableData;
             }
         }
     }

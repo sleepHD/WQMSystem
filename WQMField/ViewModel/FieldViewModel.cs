@@ -1,6 +1,7 @@
 ﻿namespace WQMField.ViewModel
 {
     using Model;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
     /// <summary>
@@ -56,6 +57,22 @@
         public string ProtocolDll
         {
             get { return _field.ProtocolDll; }
+        }
+
+        public IList<VariableData> VariableDataRecords
+        {
+            get
+            {
+                var varDataRecs = new List<VariableData>();
+                foreach(var rec in _fieldSystem.DataRecords)
+                {
+                    foreach(var varDataRec in rec.DataItems)
+                    {
+                        varDataRecs.Add(varDataRec);
+                    }
+                }
+                return varDataRecs;
+            }
         }
     }
 }

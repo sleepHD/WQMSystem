@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="WQMField.View.DataRecordsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WQMField.View"
+             xmlns:viewModel="clr-namespace:WQMField.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" DataContext="{Binding Main, Mode=OneWay, Source={StaticResource Locator}}">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="cvs" Source="{Binding VariableData}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="RecordTime"/>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+        <Style TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="{x:Type ListViewItem}">
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+        </Style>
+        <viewModel:DataRecordViewModelConverter x:Key="DataRecord"/>
+        <viewModel:IsUploadedConverter x:Key="IsUploaded"/>
+    </UserControl.Resources>
+    <DockPanel >
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right" >
+            <Button Margin="3" Padding="3">上传最新</Button>
+            <Button Margin="3" Padding="3">重新上传...</Button>
+            <Button Margin="3" Padding="3">标识已传...</Button>
+        </StackPanel>
+        <ListView ItemsSource="{Binding Source={StaticResource cvs}}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="参数" Width="120" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="值" Width="50" DisplayMemberBinding="{Binding Value}" />
+                    <GridViewColumn Header="状态" Width="50" DisplayMemberBinding="{Binding Flag}" />
+                </GridView>
+            </ListView.View>
+
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander>
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal" DataContext="{Binding Converter={StaticResource DataRecord}}">
+                                                    <TextBlock Text="{Binding RecordTime, StringFormat={} {0:yyyy/MM/dd HH:mm:ss}}" FontWeight="Bold" Foreground="Gray" FontSize="22" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text="{Binding ItemCount}" FontSize="22" Foreground="Green" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                    <TextBlock Text=" 参数" FontSize="22" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Bottom" />
+                                                    <TextBlock>
+                                                        <TextBlock.Style>
+                                                            <Style>
+                                                                <Setter Property="TextBlock.FontSize" Value="22"/>
+                                                                <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+                                                                <Setter Property="TextBlock.FontStyle" Value="Italic"/>
+                                                                <Setter Property="TextBlock.Margin" Value="10,0,0,0"/>
+                                                                <Setter Property="TextBlock.VerticalAlignment" Value="Bottom"/>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Value="False">
+                                                                        <DataTrigger.Binding>
+                                                                            <MultiBinding Converter="{StaticResource IsUploaded}">
+                                                                                <Binding/>
+                                                                                <Binding Source="{StaticResource Locator}" Path="Main.SelectedItem"/>
+                                                                            </MultiBinding>
+                                                                        </DataTrigger.Binding>
+                                                                        <DataTrigger.Setters>
+                                                                            <Setter Property="TextBlock.Text" Value="待上传"/>
+                                                                            <Setter Property="TextBlock.Foreground" Value="SandyBrown"/>
+                                                                        </DataTrigger.Setters>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Value="true">
+                                                                        <DataTrigger.Binding>
+                                                                            <MultiBinding Converter="{StaticResource IsUploaded}">
+                                                                                <Binding/>
+                                                                                <Binding Source="{StaticResource Locator}" Path="Main.SelectedItem"/>
+                                                                            </MultiBinding>
+                                                                        </DataTrigger.Binding>
+                                                                        <DataTrigger.Setters>
+                                                                            <Setter Property="TextBlock.Text" Value="已上传"/>
+                                                                            <Setter Property="TextBlock.Foreground" Value="Green"/>
+                                                                        </DataTrigger.Setters>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </TextBlock.Style>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
+        </ListView>
+    </DockPanel>
+</UserControl>

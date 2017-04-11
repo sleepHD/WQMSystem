@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WQMField"
         xmlns:viewModel="clr-namespace:WQMField.ViewModel"
+        xmlns:view="clr-namespace:WQMField.View"
         xmlns:Custom="http://www.galasoft.ch/mvvmlight" x:Class="WQMField.View.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800">
@@ -54,7 +55,7 @@
         <GridSplitter Grid.Column="1"  Grid.RowSpan="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"  Width="3" ShowsPreview="False"/>
         <TabControl  Grid.Column="2" >
             <TabItem Header="历史数据">
-                <Grid Background="#FFE5E5E5"/>
+                <view:DataRecordsView></view:DataRecordsView>
             </TabItem>
             <TabItem Header="实时数据">
                 <Grid Background="#FFE5E5E5"/>
@@ -64,10 +65,14 @@
             </TabItem>
         </TabControl>
         <GridSplitter Grid.Column="2"  Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="3" ShowsPreview="False"/>
-        <StatusBar Grid.ColumnSpan="3" Grid.Row="3" >
+        <StatusBar Grid.ColumnSpan="3" Grid.Row="3">
             <StatusBarItem DataContext="{Binding SelectedItem, Mode=OneWay}">
                 <TextBlock Text="{Binding Name}" />
             </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <ResizeGrip />
+            </StatusBarItem>
+
         </StatusBar>
     </Grid>
 </Window>

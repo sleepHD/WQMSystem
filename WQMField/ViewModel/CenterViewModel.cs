@@ -32,6 +32,8 @@
 
         public string Name { get { return _center.Name; } }
 
+        public int CenterIndex { get { return _center.CenterIndex; } }
+
         public string Path
         {
             get

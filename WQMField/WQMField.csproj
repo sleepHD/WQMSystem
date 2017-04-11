@@ -92,11 +92,20 @@
     <Compile Include="Model\VariableData.cs" />
     <Compile Include="Persistence\PersistenceManager.cs" />
     <Compile Include="ViewModel\CenterViewModel.cs" />
+    <Compile Include="ViewModel\DataRecordViewModel.cs" />
     <Compile Include="ViewModel\FieldViewModel.cs" />
+    <Compile Include="ViewModel\GroupInfo.cs" />
+    <Compile Include="ViewModel\DataRecordViewModelConverter.cs" />
+    <Compile Include="ViewModel\IsUploadedConverter.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MessageToken.cs" />
     <Compile Include="ViewModel\TreeViewItemViewModel.cs" />
+    <Compile Include="ViewModel\VariableDataViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="View\DataRecordsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -104,6 +113,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\DataRecordsView.xaml.cs">
+      <DependentUpon>DataRecordsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

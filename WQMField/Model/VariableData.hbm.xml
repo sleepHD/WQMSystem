@@ -15,6 +15,18 @@
     <!-- Simple mappings -->
     <property name="Value" />
     <property name="Flag" />
+
+    <!-- Many-to-one mapping: Variable -->
+    <many-to-one name="Variable" lazy="false"
+                 class="Variable"
+                 column="VarID"
+                 cascade="none" />
+
+    <!-- Many-to-one mapping: DataRecord -->
+    <many-to-one name="DataRecord" lazy="false"
+                 class="DataRecord"
+                 column="RecordTime"
+                 cascade="none" />
     
   </class>
 

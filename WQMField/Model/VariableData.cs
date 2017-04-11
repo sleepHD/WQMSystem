@@ -5,7 +5,9 @@
     public class VariableData
     {
         private string _varID;
+        private Variable _variable;
         private DateTime _recordTime;
+        private DataRecord _dataRecord;
         private string _flag;
         private double _value;
 
@@ -15,10 +17,23 @@
             set { _varID = value; }
         }
 
+        public virtual Variable Variable
+        {
+            get { return _variable; }
+            set { _variable = value; }
+        }
+
         public virtual DateTime RecordTime
         {
             get { return _recordTime; }
             set { _recordTime = value; }
+        }
+
+
+        public virtual DataRecord DataRecord
+        {
+            get { return _dataRecord; }
+            set { _dataRecord = value; }
         }
 
         public virtual string Flag
